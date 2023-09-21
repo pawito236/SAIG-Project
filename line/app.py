@@ -7,6 +7,9 @@ import sys
 import tempfile
 from argparse import ArgumentParser
 import re
+import openai
+import pinecone
+import datetime
 
 from flask import Flask, request, abort, send_from_directory
 from werkzeug.middleware.proxy_fix import ProxyFix
@@ -78,14 +81,17 @@ audio_config = texttospeech.AudioConfig(
     audio_encoding=texttospeech.AudioEncoding.MP3)
 
 
+with open('keys.json', 'r') as json_file:
+    data_keys = json.load(json_file)
+
+pinecone.init(api_key=data_keys["pinecone"], environment="gcp-starter")
+index = pinecone.Index("saig-project")
 
 server_url = os.environ.get('SERVER_URL') if os.environ.get('SERVER_URL') != None else "http://a87e-34-87-10-20.ngrok-free.app"
 this_server_url = os.environ.get('THIS_SERVER_URL') if os.environ.get('THIS_SERVER_URL') != None else "https://45ee-2001-fb1-a8-c558-89b2-b32-7e51-e926.ngrok-free.app"
 
-with open('keys.json', 'r') as json_file:
-    data_keys = json.load(json_file)
-
 os.environ["OPENAI_API_KEY"] = data_keys["OPENAI_API_KEY"]
+openai.api_key = data_keys["OPENAI_API_KEY"]
 global memory_global
 memory_global = ConversationBufferWindowMemory(memory_key="chat_history", return_messages=True, k=3)
 
@@ -121,10 +127,11 @@ def create_user_persona(user_id):
     doc = doc_ref.get()
     if not doc.exists:
         doc_ref.set({
-            "name": "",
+            "username": "",
+            "plant_name": "Cactus",
             "status_type" : "",
-            "status_water" : "", # low, well
-            "status_light" : "", # low, well
+            "status_water" : "low", # low, well
+            "status_light" : "well", # low, well
             "q" : [],
             "a" : []
         })  
@@ -174,12 +181,25 @@ def check_lang_code(recog_text):
 
 def custom_langchain_stream(question, user_dict):
   
+    xq = openai.Embedding.create(input=question, engine="text-embedding-ada-002")['data'][0]['embedding']
+    res = index.query([xq], top_k=4, include_metadata=True)
+    context = '\n'.join([text['metadata']['context'] for text in res['matches']])
+    print('Context: ',context)
+
     memory_local = ConversationBufferWindowMemory(memory_key="chat_history", return_messages=True, k=4)
     for i in range(len(user_dict['a'])):
         memory_local.save_context(user_dict['q'][i], user_dict['a'][i])
 
     prompt = ChatPromptTemplate.from_messages([
-        SystemMessage(content=f"Act like a little girl named lily. Reply with short Answer the following question as cute as possible."), # The persistent system prompt
+        SystemMessage(content="""Act like a little girl named lily who is a gardener who cares of plant. 
+Plant : {}
+Water status: {}
+light status: {}
+Date / time : {}
+                      
+Reply with short Answer the following question as cute as possible, inviting user to cares their plant.
+
+{}""".format(user_dict["plant_name"], user_dict["status_water"], user_dict["status_light"], datetime.datetime.now(), context)),
         MessagesPlaceholder(variable_name="chat_history"), # Where the memory will be stored.
         HumanMessagePromptTemplate.from_template("{human_input}"), # Where the human input will injected
     ])
@@ -227,16 +247,13 @@ def handle_text_message(event):
     user_dict = get_user_document(user_id)
 
     print(user_dict)
-
-    # for i in range(len(user_dict['a'])):
-    #     memory_global.save_context(user_dict['q'][i], user_dict['a'][i])
-
     ans = custom_langchain_stream(question, user_dict)
     line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text=ans))
     
     update_dict = {
+        "username" : line_bot_api.get_profile(event.source.user_id).display_name,
         "q" : user_dict['q'][-5:] + [{"input" : question}],
         "a" : user_dict['a'][-5:] + [{"output" : ans}]
     }
