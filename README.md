@@ -1,5 +1,5 @@
 # SAIG-Project (Sep. 2023)
-"For applying SAIG Lab" ผลงานเกี่ยวกับ AI ที่ตนเองภูมิใจ 1 ชิ้นงาน
+"For applying SAIG Lab" ผลงานเกี่ยวกับ AI ที่ตนเองภูมิใจ 1 ชิ้นงาน (ปวิช รุ่งฐานอุดม 66010473 วิศวกรรมคอมพิวเตอร์ ชั้นปีที่ 1)
 ![SAIG-Project](https://github.com/pawito236/SAIG-Project/assets/44425803/3b93e8b3-f126-46a5-886d-0d9c19d23f34)
 
 # จุดเริ่มต้นไอเดีย (Aug. - Sep. 2020)
@@ -16,7 +16,9 @@
 - Q&A ปรับเปลี่ยนจาก Dialogflow เป็น ChatGPT และทำ Prompt Engineering ในการปรับแต่งบุคลิก ลักษณะนิสัยการตอบกลับของ Chatbot
 - เพิ่ม Feature การโต้ตอบด้วยเสียง โดย STT (Speech-to-Text) ใช้งาน Whisper และ TTS eng ใช้ Speech-T5 / TTS th ใช้ google api
 - ปรับ Database เป็น firestore เพื่อให้การจัดเก็บข้อมูลมีประสิทธิภาพมากขึ้น
-- ใช้งาน Pinecone Vector database ในการเก็บ Context ที่ใช้ในการตอบคำถาม 
+- ใช้งาน Pinecone Vector database ในการเก็บ Context ที่ใช้ในการตอบคำถาม
+
+By ปวิช รุ่งฐานอุดม 66010473 วิศวกรรมคอมพิวเตอร์ ชั้นปีที่ 1
 ![3](https://github.com/pawito236/SAIG-Project/assets/44425803/38a989ca-1ee9-4490-9368-975a7cbc354f)
 
 # Award & Credit (Aug. - Sep. 2020)
