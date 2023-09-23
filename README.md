@@ -1,6 +1,7 @@
 # SAIG-Project (Sep. 2023)
 "For applying SAIG Lab" ผลงานเกี่ยวกับ AI ที่ตนเองภูมิใจ 1 ชิ้นงาน (ปวิช รุ่งฐานอุดม 66010473 วิศวกรรมคอมพิวเตอร์ ชั้นปีที่ 1)
-![SAIG-Project](https://github.com/pawito236/SAIG-Project/assets/44425803/3b93e8b3-f126-46a5-886d-0d9c19d23f34)
+![4](https://github.com/pawito236/SAIG-Project/assets/44425803/1d6ef17e-189d-43ab-8048-996f98d09bda)
+
 
 # จุดเริ่มต้นไอเดีย (Aug. - Sep. 2020)
 ณ ตอนสมัยชั้น ม.ปลาย ได้เริ่มต้นทำ IoT โปรเจคด้วย Arduino - ESP32 ซึ่งตอนนั้นทีมก็ยังไม่ได้มีประสบการณ์ด้านนี้เท่าไร เราก็ได้คุยไอเดียกันจนได้ไอเดียที่ว่า จะเป็นไปได้ไหมที่เราจะคุยกับต้นไม้ ต้นไม้ที่เราปลูกจะสามารถสื่อสารกับเราได้ ทำให้เรารู้ในสิ่งที่เขาต้องการ เราสามารถดูแลเขาได้แม้เราจะไม่มีความรู้การปลูกต้นไม้ ... "จะเป็นไปได้ไหมที่เราจะเป็นเพื่อนกับต้นไม้" 
@@ -19,7 +20,9 @@
 - ใช้งาน Pinecone Vector database ในการเก็บ Context ที่ใช้ในการตอบคำถาม
 
 By ปวิช รุ่งฐานอุดม 66010473 วิศวกรรมคอมพิวเตอร์ ชั้นปีที่ 1
-![3](https://github.com/pawito236/SAIG-Project/assets/44425803/38a989ca-1ee9-4490-9368-975a7cbc354f)
+![3](https://github.com/pawito236/SAIG-Project/assets/44425803/56a669f1-5f5d-4632-805e-6a765a4848ed)
+
 
 # Award & Credit (Aug. - Sep. 2020)
-![PlantBuddy-resize](https://github.com/pawito236/SAIG-Project/assets/44425803/ff408dea-ace4-4992-8e04-1aa001483888)
+![PlantBuddy-resize](https://github.com/pawito236/SAIG-Project/assets/44425803/cec74fd1-b2e5-40be-96fc-e06d2da0b138)
+
